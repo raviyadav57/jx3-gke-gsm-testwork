@@ -41,7 +41,7 @@ data:
         - needs-rebase
         repos:
         - raviyadav57/jx3-gke-gsm-testwork
-      target_url: http://lighthouse-jx./merge/status
+      target_url: http://lighthouse-jx.34.134.255.212.nip.io/merge/status
 kind: ConfigMap
 metadata:
   creationTimestamp: null
