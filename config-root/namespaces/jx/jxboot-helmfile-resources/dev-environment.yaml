@@ -1,0 +1,42 @@
+# Source: jxboot-helmfile-resources/templates/environments.yaml
+apiVersion: jenkins.io/v1
+kind: Environment
+metadata:
+  labels:
+    env: "dev"
+    team: jx
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  name: "dev"
+  annotations:
+    meta.helm.sh/release-name: 'jxboot-helmfile-resources'
+    meta.helm.sh/release-namespace: 'jx'
+  namespace: jx
+spec:
+  source:
+    ref: "master"
+    url: https://github.com/raviyadav57/jx3-gke-gsm-testwork.git
+  kind: Development
+  label: Development
+  namespace: jx
+  promotionStrategy: "Never"
+  webHookEngine: "Lighthouse"
+  teamSettings:
+    appsRepository: https://jenkins-x-charts.github.io/repo
+    defaultScheduler:
+      apiVersion: jenkins.io/v1
+      kind: Scheduler
+      name: jx-meta-pipeline
+    dockerRegistryOrg: "oci"
+    envOrganisation: todo
+    gitServer: https://github.com
+    kubeProvider: "gke"
+    pipelineUsername: "ravi.yadav2@soprasteria.com"
+    pipelineUserEmail: "jenkins-x@googlegroups.com"
+    prowConfig: Scheduler
+    storageLocations:
+    - bucketUrl: "gs://logs-jx-cluster-a87ed73f2d35"
+      classifier: "logs"
+    - bucketUrl: "gs://reports-jx-cluster-a87ed73f2d35"
+      classifier: "reports"
+    - bucketUrl: "gs://repository-jx-cluster-a87ed73f2d35"
+      classifier: "repository"

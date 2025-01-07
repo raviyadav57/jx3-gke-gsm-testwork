@@ -1,0 +1,11 @@
+# Source: jx-verify/templates/job-sa.yaml
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: jx-verify-gc-jobs
+  annotations:
+    meta.helm.sh/release-name: 'jx-verify'
+    meta.helm.sh/release-namespace: 'jx-staging'
+  namespace: jx-staging
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'

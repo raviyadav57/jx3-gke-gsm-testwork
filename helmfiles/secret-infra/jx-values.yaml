@@ -20,16 +20,26 @@ jxRequirements:
     enabled: false
     schedule: ""
   cluster:
+    chartRepository: http://jenkins-x-chartmuseum.jx.svc.cluster.local:8080
+    clusterName: jx-cluster
     devEnvApprovers:
     - todo
+    dockerRegistryOrg: oci
     environmentGitOwner: todo
     gitKind: github
     gitName: github
     gitServer: https://github.com
+    gke:
+      projectNumber: "496297688115"
     kanikoFlags: --skip-unused-stages --snapshotMode=redo
+    project: de-gcp-sls-dev
     provider: gke
+    registry: us-central1-docker.pkg.dev/de-gcp-sls-dev
+    zone: us-central1-a
   environments:
   - key: dev
+    owner: raviyadav57
+    repository: jx3-gke-gsm-testwork
   - key: staging
   - key: production
   ingress:
@@ -39,9 +49,18 @@ jxRequirements:
     tls:
       email: ""
       enabled: false
-      production: false
+      production: true
+  pipelineUser:
+    username: ravi.yadav2@soprasteria.com
   repository: nexus
   secretStorage: gsm
+  storage:
+  - name: logs
+    url: gs://logs-jx-cluster-a87ed73f2d35
+  - name: reports
+    url: gs://reports-jx-cluster-a87ed73f2d35
+  - name: repository
+    url: gs://repository-jx-cluster-a87ed73f2d35
   vault: {}
   webhook: lighthouse
 jxRequirementsIngressExternalDNS:

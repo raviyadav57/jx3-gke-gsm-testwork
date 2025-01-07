@@ -1,0 +1,36 @@
+# Source: jx-verify/templates/job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: jx-verify-gc-jobs-h8sxh
+  annotations:
+    kapp.k14s.io/disable-wait: ""
+    meta.helm.sh/release-name: 'jx-verify'
+    meta.helm.sh/release-namespace: 'jx-production'
+  labels:
+    app: jx-verify-gc-jobs-sphwu
+    release: jx-verify
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  namespace: jx-production
+spec:
+  backoffLimit: 1
+  completions: 1
+  parallelism: 1
+  template:
+    metadata:
+    spec:
+      containers:
+      - command:
+        - jx-verify
+        - pods
+        env:
+        - name: XDG_CONFIG_HOME
+          value: /home
+        image: ghcr.io/jenkins-x/jx-verify:0.3.9
+        imagePullPolicy: IfNotPresent
+        name: job
+      dnsPolicy: ClusterFirst
+      restartPolicy: Never
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      serviceAccountName: jx-verify-gc-jobs
